@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topdeals — Your Online Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#080810;--dark2:#10101a;--dark3:#18182a;--green:#1db87a;--green2:#14955f;--gold:#c9a84c;--light:#edeae4;--muted:#777;--muted2:#555;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--light);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+body.ar{font-family:'Cairo',sans-serif;direction:rtl;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,16,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;letter-spacing:3px;color:var(--light);}
+.nav-brand em{color:var(--green);font-style:normal;}
+.nav-right{display:flex;gap:1.5rem;align-items:center;}
+.nav-links{display:flex;gap:1.5rem;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color .2s;}
+.nav-links a:hover{color:var(--light);}
+.nav-cta{background:var(--green)!important;color:var(--dark)!important;padding:8px 20px;border-radius:50px;font-weight:600;font-size:13px!important;}
+
+/* LANG SWITCHER */
+.lang-switcher{display:flex;gap:2px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:50px;padding:3px;}
+.lang-btn{border:none;background:transparent;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:50px;cursor:pointer;transition:all .2s;letter-spacing:.5px;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:var(--green);color:var(--dark);}
+.lang-btn:hover:not(.active){color:var(--light);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 5% 5rem;position:relative;overflow:hidden;}
+.glow1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(29,184,122,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.glow2{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 70%);top:20%;right:5%;pointer-events:none;}
+.glow3{position:absolute;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(29,184,122,.06) 0%,transparent 70%);bottom:20%;left:5%;pointer-events:none;}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(29,184,122,.1);border:1px solid rgba(29,184,122,.25);border-radius:50px;padding:6px 18px;font-size:12px;color:var(--green);margin-bottom:2rem;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,7vw,82px);font-weight:900;line-height:1.08;margin-bottom:1.5rem;}
+body.ar .hero h1{font-family:'Cairo',sans-serif;}
+.hero h1 .gr{color:var(--green);}
+.hero-sub{font-size:17px;color:var(--muted);max-width:500px;line-height:1.75;margin:0 auto 2.5rem;}
+.btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:var(--green);color:var(--dark);padding:14px 34px;border-radius:50px;font-weight:600;font-size:15px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-p:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 14px 32px rgba(29,184,122,.28);}
+.btn-s{background:transparent;color:var(--light);padding:14px 34px;border-radius:50px;font-size:15px;text-decoration:none;border:1px solid var(--border2);transition:all .2s;}
+.btn-s:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:4rem;justify-content:center;margin-top:4.5rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.stat-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--green);}
+.stat-label{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.5px;}
+
+/* SECTIONS */
+.section{padding:6rem 5%;position:relative;z-index:1;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.s-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1.2;margin-bottom:2rem;}
+body.ar .s-title{font-family:'Cairo',sans-serif;}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5px;background:var(--border);border:1px solid var(--border);}
+.feat-card{background:var(--dark2);padding:2.5rem 2rem;transition:background .2s;position:relative;overflow:hidden;}
+.feat-card:hover{background:var(--dark3);}
+.feat-icon{font-size:28px;margin-bottom:1.2rem;}
+.feat-name{font-weight:600;font-size:15px;margin-bottom:8px;color:var(--light);}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* DEMO */
+.demo-section{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.demo-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.demo-list{list-style:none;margin:1.5rem 0 2rem;display:flex;flex-direction:column;gap:10px;}
+.demo-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);line-height:1.6;}
+.demo-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+.demo-visual{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;overflow:hidden;}
+.demo-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));}
+.demo-dot2{width:10px;height:10px;border-radius:50%;}
+.d1{background:#ff5f57;}.d2{background:#ffbd2e;}.d3{background:#28ca41;}
+.demo-url{background:rgba(255,255,255,.05);border-radius:6px;padding:6px 12px;font-size:11px;color:var(--muted);flex:1;}
+.demo-screen{background:var(--dark);border-radius:8px;padding:1.5rem;min-height:200px;margin-top:1rem;}
+.demo-row{height:10px;background:rgba(255,255,255,.06);border-radius:4px;margin-bottom:10px;}
+.demo-row.w60{width:60%;}.demo-row.w80{width:80%;}.demo-row.w40{width:40%;}.demo-row.w90{width:90%;}
+.demo-row.green{background:rgba(29,184,122,.2);width:30%;}
+.demo-mini-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:1rem;}
+.demo-card-mini{background:rgba(255,255,255,.04);border-radius:6px;height:50px;}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:800px;margin:0 auto;}
+.price-card{border:1px solid var(--border);border-radius:16px;padding:2.5rem 2rem;position:relative;transition:transform .2s;background:var(--dark2);}
+.price-card:hover{transform:translateY(-4px);}
+.price-card.pro{border-color:rgba(29,184,122,.4);background:linear-gradient(135deg,var(--dark2),rgba(29,184,122,.04));}
+.pro-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--dark);font-size:11px;font-weight:700;padding:4px 16px;border-radius:50px;white-space:nowrap;letter-spacing:1px;}
+.plan-name{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;}
+.plan-subtitle{font-size:12px;color:var(--muted2);margin-bottom:1rem;}
+.plan-price{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--light);line-height:1;}
+.plan-price sup{font-size:20px;vertical-align:top;margin-top:8px;display:inline-block;}
+.plan-price span{font-size:16px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300;}
+.plan-setup{font-size:12px;color:var(--muted);margin-top:6px;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:2rem;}
+.plan-features li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+.plan-btn{display:block;text-align:center;padding:12px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;}
+.plan-btn.outline{border:1px solid var(--border2);color:var(--light);}
+.plan-btn.outline:hover{border-color:var(--green);color:var(--green);}
+.plan-btn.filled{background:var(--green);color:var(--dark);}
+.plan-btn.filled:hover{background:var(--green2);box-shadow:0 10px 28px rgba(29,184,122,.25);}
+
+/* FAQ */
+.obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.obj-item{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;}
+.obj-q{font-size:13px;font-weight:600;color:var(--light);margin-bottom:8px;}
+.obj-a{font-size:13px;color:var(--muted);line-height:1.7;border-right:2px solid var(--green);padding-right:10px;}
+body:not(.ar) .obj-a{border-right:none;border-left:2px solid var(--green);padding-right:0;padding-left:10px;}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,rgba(29,184,122,.08),rgba(201,168,76,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.cta-inner{max-width:600px;margin:0 auto;text-align:center;}
+.cta-inner p{font-size:15px;color:var(--muted);margin-bottom:2rem;line-height:1.7;}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 40px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:0 8px 28px rgba(37,211,102,.25);}
+.whatsapp-btn:hover{background:#1ebc57;transform:translateY(-2px);box-shadow:0 14px 36px rgba(37,211,102,.35);}
+.whatsapp-btn svg{width:22px;height:22px;fill:#fff;flex-shrink:0;}
+
+/* FOOTER */
+footer{padding:2rem 5%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-brand{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;letter-spacing:2px;}
+.footer-brand em{color:var(--green);font-style:normal;}
+.footer-info{font-size:12px;color:var(--muted);text-align:center;}
+.footer-contact{font-size:12px;color:var(--muted);}
+.footer-contact a{color:var(--green);text-decoration:none;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .demo-inner{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .obj-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:2rem;}
+  .section{padding:4rem 5%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">TOP<em>DEALS</em></div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="https://wa.me/21654116584" class="nav-cta" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ar')">AR</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow1"></div><div class="glow2"></div><div class="glow3"></div>
+  <div class="badge"><span class="dot"></span> <span data-i18n="hero.badge">Available in Tunisia</span></div>
+  <h1 data-i18n-html="hero.h1">Your online shop,<br><span class="gr">ready</span> in 24h.</h1>
+  <p class="hero-sub" data-i18n="hero.sub">A complete e-commerce site with admin dashboard, order management, live chat and Facebook Pixel — all included.</p>
+  <div class="btns">
+    <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" class="btn-p">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <span data-i18n="hero.demo_btn">View Demo</span>
+    </a>
+    <a href="https://wa.me/21654116584" target="_blank" class="btn-s" data-i18n="hero.contact_btn">Contact us</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label" data-i18n="stats.launch">Launch time</div></div>
+    <div class="stat-item"><div class="stat-num">0</div><div class="stat-label" data-i18n="stats.code">Coding required</div></div>
+    <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stats.products">Products & orders</div></div>
+    <div class="stat-item"><div class="stat-num">TND</div><div class="stat-label" data-i18n="stats.payment">Cash on delivery</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="s-tag" data-i18n="features.tag">Features</div>
+    <div class="s-title" data-i18n="features.title">Everything your shop needs.</div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">🛍️</div><div class="feat-name" data-i18n="f1.name">Complete Dashboard</div><div class="feat-desc" data-i18n="f1.desc">Manage products, categories, colors and logo without touching code.</div></div>
+      <div class="feat-card"><div class="feat-icon">📦</div><div class="feat-name" data-i18n="f2.name">Order Management</div><div class="feat-desc" data-i18n="f2.desc">Track every order in real time — name, address, product, status.</div></div>
+      <div class="feat-card"><div class="feat-icon">💬</div><div class="feat-name" data-i18n="f3.name">Built-in Live Chat</div><div class="feat-desc" data-i18n="f3.desc">Customers write to you from the site, you reply from your dashboard.</div></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-name" data-i18n="f4.name">Facebook Pixel</div><div class="feat-desc" data-i18n="f4.desc">Retarget visitors and optimize your ads automatically.</div></div>
+      <div class="feat-card"><div class="feat-icon">🚚</div><div class="feat-name" data-i18n="f5.name">Cash on Delivery</div><div class="feat-desc" data-i18n="f5.desc">Enabled by default across all of Tunisia. Customers pay on receipt.</div></div>
+      <div class="feat-card"><div class="feat-icon">🌐</div><div class="feat-name" data-i18n="f6.name">3 Languages</div><div class="feat-desc" data-i18n="f6.desc">Your shop displays in French, English and Arabic based on visitor choice.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section demo-section" id="demo">
+  <div class="demo-inner">
+    <div class="demo-text">
+      <div class="s-tag" data-i18n="demo.tag">Live Demo</div>
+      <div class="s-title" data-i18n="demo.title">See it in action.</div>
+      <ul class="demo-list">
+        <li data-i18n="demo.l1">Full shop ready to sell from day one</li>
+        <li data-i18n="demo.l2">Real-time admin dashboard</li>
+        <li data-i18n="demo.l3">Fully working order system</li>
+        <li data-i18n="demo.l4">Live customer chat active</li>
+      </ul>
+      <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" class="btn-p" style="display:inline-flex;width:fit-content;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span data-i18n="demo.btn">Open Demo</span>
+      </a>
+    </div>
+    <div class="demo-visual">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="demo-dot2 d1"></div><div class="demo-dot2 d2"></div><div class="demo-dot2 d3"></div>
+        <div class="demo-url">shoptemplate-3t7u.onrender.com</div>
+      </div>
+      <div class="demo-screen">
+        <div class="demo-row green"></div>
+        <div class="demo-row w80"></div><div class="demo-row w60"></div>
+        <div class="demo-row w90"></div><div class="demo-row w40"></div>
+        <div class="demo-mini-grid">
+          <div class="demo-card-mini"></div><div class="demo-card-mini"></div><div class="demo-card-mini"></div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;font-size:11px;color:var(--muted);text-align:center;" data-i18n="demo.caption">Admin dashboard interface</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <div class="s-tag" data-i18n="pricing.tag">Pricing</div>
+      <div class="s-title" data-i18n="pricing.title">Simple & transparent.</div>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="plan-name">STARTER</div>
+        <div class="plan-subtitle" data-i18n="starter.sub">Basic plan</div>
+        <div class="plan-price"><sup>TND</sup>50<span data-i18n="plan.month">/month</span></div>
+        <div class="plan-setup" data-i18n="starter.setup">+ 100 TND setup fee (one time)</div>
+        <ul class="plan-features">
+          <li data-i18n="starter.f1">Complete online shop</li>
+          <li data-i18n="starter.f2">Admin dashboard</li>
+          <li data-i18n="starter.f3">Products & order management</li>
+          <li data-i18n="starter.f4">Built-in live chat</li>
+          <li data-i18n="starter.f5">Facebook Pixel</li>
+          <li data-i18n="starter.f6">onrender.com domain</li>
+        </ul>
+        <a href="https://wa.me/21654116584?text=Hello Topdeals, I am interested in the Starter plan" target="_blank" class="plan-btn outline" data-i18n="starter.btn">Get Started</a>
+      </div>
+      <div class="price-card pro">
+        <div class="pro-badge" data-i18n="pro.badge">⭐ RECOMMENDED</div>
+        <div class="plan-name">PRO</div>
+        <div class="plan-subtitle" data-i18n="pro.sub">Professional plan</div>
+        <div class="plan-price"><sup>TND</sup>120<span data-i18n="plan.month">/month</span></div>
+        <div class="plan-setup" data-i18n="pro.setup">+ 200 TND setup fee (one time)</div>
+        <ul class="plan-features">
+          <li data-i18n="pro.f1">Everything in Starter</li>
+          <li data-i18n="pro.f2">Dedicated server — 0 delay</li>
+          <li data-i18n="pro.f3">Custom domain name</li>
+          <li data-i18n="pro.f4">Priority support</li>
+          <li data-i18n="pro.f5">Free updates included</li>
+        </ul>
+        <a href="https://wa.me/21654116584?text=Hello Topdeals, I am interested in the Pro plan" target="_blank" class="plan-btn filled" data-i18n="pro.btn">Choose Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div class="s-tag">FAQ</div>
+      <div class="s-title" data-i18n="faq.title">Common questions.</div>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-item"><div class="obj-q" data-i18n="faq.q1">I already have Facebook, why a website?</div><div class="obj-a" data-i18n="faq.a1">Facebook is closed at night. Your site sells while you sleep.</div></div>
+      <div class="obj-item"><div class="obj-q" data-i18n="faq.q2">Is it hard to manage?</div><div class="obj-a" data-i18n="faq.a2">If you can post on Facebook, you can manage this site.</div></div>
+      <div class="obj-item"><div class="obj-q" data-i18n="faq.q3">Do Tunisians buy online?</div><div class="obj-a" data-i18n="faq.a3">E-commerce in Tunisia grows 30% every year. The time is now.</div></div>
+      <div class="obj-item"><div class="obj-q" data-i18n="faq.q4">What if I stop paying?</div><div class="obj-a" data-i18n="faq.a4">Your shop is suspended. No data lost if you come back.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+  <div class="cta-inner">
+    <div class="s-tag" data-i18n="cta.tag">Ready?</div>
+    <div class="s-title" data-i18n="cta.title">Launch your shop today.</div>
+    <p data-i18n="cta.sub">Contact us on WhatsApp and your shop will be online within 24 hours.</p>
+    <a href="https://wa.me/21654116584?text=Hello Topdeals, I want to create my online shop" target="_blank" class="whatsapp-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp — +216 54 116 584
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">TOP<em>DEALS</em></div>
+  <div class="footer-info" data-i18n="footer.copy">© 2026 Topdeals Tunisia. All rights reserved.</div>
+  <div class="footer-contact">
+    <a href="https://wa.me/21654116584">+216 54 116 584</a> ·
+    <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" data-i18n="footer.demo">View demo</a>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    "nav.features":"Features","nav.demo":"Demo","nav.pricing":"Pricing","nav.contact":"Contact",
+    "hero.badge":"Available in Tunisia",
+    "hero.h1":'Your online shop,<br><span class="gr">ready</span> in 24h.',
+    "hero.sub":"A complete e-commerce site with admin dashboard, order management, live chat and Facebook Pixel — all included.",
+    "hero.demo_btn":"View Demo","hero.contact_btn":"Contact us",
+    "stats.launch":"Launch time","stats.code":"Coding required","stats.products":"Products & orders","stats.payment":"Cash on delivery",
+    "features.tag":"FEATURES","features.title":"Everything your shop needs.",
+    "f1.name":"Complete Dashboard","f1.desc":"Manage products, categories, colors and logo without touching code.",
+    "f2.name":"Order Management","f2.desc":"Track every order in real time — name, address, product, status.",
+    "f3.name":"Built-in Live Chat","f3.desc":"Customers write to you from the site, you reply from your dashboard.",
+    "f4.name":"Facebook Pixel","f4.desc":"Retarget visitors and optimize your ads automatically.",
+    "f5.name":"Cash on Delivery","f5.desc":"Enabled by default across all of Tunisia. Customers pay on receipt.",
+    "f6.name":"3 Languages","f6.desc":"Your shop displays in French, English and Arabic based on visitor choice.",
+    "demo.tag":"LIVE DEMO","demo.title":"See it in action.",
+    "demo.l1":"Full shop ready to sell from day one","demo.l2":"Real-time admin dashboard",
+    "demo.l3":"Fully working order system","demo.l4":"Live customer chat active",
+    "demo.btn":"Open Demo","demo.caption":"Admin dashboard interface",
+    "pricing.tag":"PRICING","pricing.title":"Simple & transparent.",
+    "starter.sub":"Basic plan","starter.setup":"+ 100 TND setup fee (one time)",
+    "starter.f1":"Complete online shop","starter.f2":"Admin dashboard",
+    "starter.f3":"Products & order management","starter.f4":"Built-in live chat",
+    "starter.f5":"Facebook Pixel","starter.f6":"onrender.com domain","starter.btn":"Get Started",
+    "plan.month":"/month",
+    "pro.badge":"⭐ RECOMMENDED","pro.sub":"Professional plan","pro.setup":"+ 200 TND setup fee (one time)",
+    "pro.f1":"Everything in Starter","pro.f2":"Dedicated server — 0 delay",
+    "pro.f3":"Custom domain name","pro.f4":"Priority support","pro.f5":"Free updates included","pro.btn":"Choose Pro",
+    "faq.title":"Common questions.",
+    "faq.q1":"I already have Facebook, why a website?","faq.a1":"Facebook is closed at night. Your site sells while you sleep.",
+    "faq.q2":"Is it hard to manage?","faq.a2":"If you can post on Facebook, you can manage this site.",
+    "faq.q3":"Do Tunisians buy online?","faq.a3":"E-commerce in Tunisia grows 30% every year. The time is now.",
+    "faq.q4":"What if I stop paying?","faq.a4":"Your shop is suspended. No data lost if you come back.",
+    "cta.tag":"READY?","cta.title":"Launch your shop today.",
+    "cta.sub":"Contact us on WhatsApp and your shop will be online within 24 hours.",
+    "footer.copy":"© 2026 Topdeals Tunisia. All rights reserved.","footer.demo":"View demo"
+  },
+  fr: {
+    "nav.features":"Fonctionnalités","nav.demo":"Démo","nav.pricing":"Tarifs","nav.contact":"Contact",
+    "hero.badge":"Disponible en Tunisie",
+    "hero.h1":'Votre boutique<br><span class="gr">en ligne</span>, prête en 24h.',
+    "hero.sub":"Un site e-commerce complet avec tableau de bord, gestion des commandes, chat client et Facebook Pixel — tout inclus.",
+    "hero.demo_btn":"Voir la démo","hero.contact_btn":"Nous contacter",
+    "stats.launch":"Délai de lancement","stats.code":"Connaissance en code","stats.products":"Produits & commandes","stats.payment":"Paiement à la livraison",
+    "features.tag":"FONCTIONNALITÉS","features.title":"Tout ce dont votre boutique a besoin.",
+    "f1.name":"Tableau de bord complet","f1.desc":"Gérez vos produits, catégories, couleurs et logo sans toucher au code.",
+    "f2.name":"Gestion des commandes","f2.desc":"Suivez chaque commande en temps réel — nom, adresse, produit, statut.",
+    "f3.name":"Chat client intégré","f3.desc":"Vos clients vous écrivent depuis le site, vous répondez depuis votre dashboard.",
+    "f4.name":"Facebook Pixel","f4.desc":"Retargetez vos visiteurs et optimisez vos publicités automatiquement.",
+    "f5.name":"Paiement à la livraison","f5.desc":"Activé par défaut dans toute la Tunisie. Vos clients paient à la réception.",
+    "f6.name":"3 Langues","f6.desc":"Votre boutique s'affiche en français, anglais et arabe selon le visiteur.",
+    "demo.tag":"DÉMO LIVE","demo.title":"Voyez-le en action.",
+    "demo.l1":"Boutique complète prête à vendre dès le premier jour","demo.l2":"Tableau de bord admin en temps réel",
+    "demo.l3":"Système de commande entièrement fonctionnel","demo.l4":"Chat client actif",
+    "demo.btn":"Ouvrir la démo","demo.caption":"Interface tableau de bord admin",
+    "pricing.tag":"TARIFS","pricing.title":"Simple et transparent.",
+    "starter.sub":"Plan de base","starter.setup":"+ 100 TND frais d'installation (une fois)",
+    "starter.f1":"Boutique en ligne complète","starter.f2":"Tableau de bord admin",
+    "starter.f3":"Gestion produits & commandes","starter.f4":"Chat client intégré",
+    "starter.f5":"Facebook Pixel","starter.f6":"Domaine onrender.com","starter.btn":"Commencer",
+    "plan.month":"/mois",
+    "pro.badge":"⭐ RECOMMANDÉ","pro.sub":"Plan professionnel","pro.setup":"+ 200 TND frais d'installation (une fois)",
+    "pro.f1":"Tout du plan Starter","pro.f2":"Serveur dédié — 0 délai",
+    "pro.f3":"Nom de domaine personnalisé","pro.f4":"Support prioritaire","pro.f5":"Mises à jour incluses","pro.btn":"Choisir Pro",
+    "faq.title":"Questions fréquentes.",
+    "faq.q1":"J'ai déjà Facebook, pourquoi un site ?","faq.a1":"Facebook est fermé la nuit. Votre site vend pendant que vous dormez.",
+    "faq.q2":"Est-ce difficile à gérer ?","faq.a2":"Si vous pouvez poster sur Facebook, vous pouvez gérer ce site.",
+    "faq.q3":"Les Tunisiens achètent-ils en ligne ?","faq.a3":"Le e-commerce en Tunisie croît de 30% chaque année. C'est maintenant.",
+    "faq.q4":"Que se passe-t-il si j'arrête de payer ?","faq.a4":"Votre boutique est suspendue. Aucune donnée perdue si vous revenez.",
+    "cta.tag":"PRÊT ?","cta.title":"Lancez votre boutique aujourd'hui.",
+    "cta.sub":"Contactez-nous sur WhatsApp et votre boutique sera en ligne dans les 24h.",
+    "footer.copy":"© 2026 Topdeals Tunisie. Tous droits réservés.","footer.demo":"Voir la démo"
+  },
+  ar: {
+    "nav.features":"المميزات","nav.demo":"ديمو","nav.pricing":"الأسعار","nav.contact":"تواصل",
+    "hero.badge":"متاح في تونس",
+    "hero.h1":'متجرك الإلكتروني<br><span class="gr">جاهز</span> في 24 ساعة.',
+    "hero.sub":"موقع تجارة إلكترونية كامل مع لوحة تحكم، إدارة طلبيات، شات مباشر وفيسبوك بيكسل — كل شيء مضمّن.",
+    "hero.demo_btn":"شوف الديمو","hero.contact_btn":"تواصل معنا",
+    "stats.launch":"وقت الإطلاق","stats.code":"بدون برمجة","stats.products":"منتجات وطلبيات","stats.payment":"الدفع عند الاستلام",
+    "features.tag":"المميزات","features.title":"كل شيء يحتاجه متجرك.",
+    "f1.name":"لوحة تحكم كاملة","f1.desc":"تضيف منتجات، تغير الألوان والشعار — بدون برمجة.",
+    "f2.name":"نظام طلبيات واضح","f2.desc":"تشوف كل طلبية — الاسم، العنوان، المنتج، والحالة في الوقت الحقيقي.",
+    "f3.name":"شات مباشر مع الزبائن","f3.desc":"الزبون يكتبلك من الموقع وأنت ترد من لوحة التحكم — بدون واتساب.",
+    "f4.name":"فيسبوك بيكسل مدمج","f4.desc":"الموقع يتذكر كل زائر — إعلاناتك تصل للناس الصح وتوفر في الميزانية.",
+    "f5.name":"الدفع عند الاستلام","f5.desc":"مفعّل تلقائياً في كامل تراب الجمهورية التونسية.",
+    "f6.name":"3 لغات","f6.desc":"موقعك يظهر بالعربي، الفرنسي والإنجليزي حسب اختيار الزبون.",
+    "demo.tag":"ديمو مباشر","demo.title":"شوف الموقع وهو يشتغل.",
+    "demo.l1":"متجر جاهز للبيع من أول يوم","demo.l2":"لوحة تحكم مباشرة للأدمن",
+    "demo.l3":"نظام طلبيات يشتغل بالكامل","demo.l4":"شات مع الزبائن فعّال",
+    "demo.btn":"افتح الديمو","demo.caption":"واجهة لوحة التحكم",
+    "pricing.tag":"الأسعار","pricing.title":"واضح وبدون مفاجآت.",
+    "starter.sub":"الباقة الأساسية","starter.setup":"+ 100 دينار رسوم إعداد (مرة واحدة)",
+    "starter.f1":"متجر إلكتروني كامل","starter.f2":"لوحة تحكم للأدمن",
+    "starter.f3":"إدارة منتجات وطلبيات","starter.f4":"شات مباشر مع الزبائن",
+    "starter.f5":"فيسبوك بيكسل","starter.f6":"نطاق onrender.com","starter.btn":"ابدأ الآن",
+    "plan.month":"/شهرياً",
+    "pro.badge":"⭐ الأفضل","pro.sub":"الباقة الاحترافية","pro.setup":"+ 200 دينار رسوم إعداد (مرة واحدة)",
+    "pro.f1":"كل مميزات الباقة الأساسية","pro.f2":"سيرفر مخصص — بدون تأخير",
+    "pro.f3":"نطاق خاص بمحلك","pro.f4":"دعم تقني أولوية","pro.f5":"تحديثات مجانية","pro.btn":"اختر Pro",
+    "faq.title":"أسئلة شائعة.",
+    "faq.q1":"عندي فيسبوك، علاش نحتاج موقع؟","faq.a1":"فيسبوك ما يبيعش وأنت نايم — الموقع يبيع 24/24.",
+    "faq.q2":"صعب تتعلم تتحكم فيه؟","faq.a2":"كيف تضيف بوست في فيسبوك — نفس الشيء بالضبط.",
+    "faq.q3":"الناس في تونس يشروا من النت؟","faq.a3":"التجارة الإلكترونية في تونس تكبر 30% كل سنة. الوقت هو الآن.",
+    "faq.q4":"شنو يصير كي نوقف الدفع؟","faq.a4":"موقعك يتوقف — لكن بياناتك محفوظة إذا رجعت.",
+    "cta.tag":"مستعد؟","cta.title":"ابدأ تبيع من اليوم.",
+    "cta.sub":"راسلنا في واتساب وموقعك يكون جاهز في 24 ساعة.",
+    "footer.copy":"© 2026 Topdeals تونس. جميع الحقوق محفوظة.","footer.demo":"شوف الديمو"
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+
+  // Update html dir and body class
+  document.documentElement.lang = lang;
+  document.body.classList.toggle('ar', lang === 'ar');
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+
+  // Update text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+
+  // Update HTML elements (hero h1 with span)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key]) el.innerHTML = t[key];
+  });
+
+  // Update WhatsApp links
+  const waMessages = {
+    en: { starter: 'Hello Topdeals, I am interested in the Starter plan', pro: 'Hello Topdeals, I am interested in the Pro plan', main: 'Hello Topdeals, I want to create my online shop' },
+    fr: { starter: 'Bonjour Topdeals, je suis intéressé par le plan Starter', pro: 'Bonjour Topdeals, je suis intéressé par le plan Pro', main: 'Bonjour Topdeals, je veux créer ma boutique en ligne' },
+    ar: { starter: 'مرحبا Topdeals، أنا مهتم بالباقة الأساسية', pro: 'مرحبا Topdeals، أنا مهتم بالباقة الاحترافية', main: 'مرحبا Topdeals، أريد إنشاء متجري الإلكتروني' }
+  };
+  const msg = waMessages[lang];
+  document.querySelectorAll('.plan-btn')[0].href = `https://wa.me/21654116584?text=${encodeURIComponent(msg.starter)}`;
+  document.querySelectorAll('.plan-btn')[1].href = `https://wa.me/21654116584?text=${encodeURIComponent(msg.pro)}`;
+  document.querySelector('.whatsapp-btn').href = `https://wa.me/21654116584?text=${encodeURIComponent(msg.main)}`;
+}
+
+// Init with EN
+setLang('en');
+</script>
+</body>
+</html>
