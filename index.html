@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Topdeals — Your Online Shop</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--dark:#080810;--dark2:#10101a;--dark3:#18182a;--green:#1db87a;--green2:#14955f;--gold:#c9a84c;--light:#edeae4;--muted:#777;--muted2:#555;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);}
+:root{--dark:#ffffff;--dark2:#f7f7f5;--dark3:#eef0ed;--green:#1db87a;--green2:#14955f;--gold:#c9a84c;--light:#16161f;--muted:#6b6b6b;--muted2:#8a8a8a;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--dark);color:var(--light);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
 body.ar{font-family:'Cairo',sans-serif;direction:rtl;}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.15;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,16,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 20px rgba(0,0,0,0.03);}
 .nav-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;letter-spacing:3px;color:var(--light);}
 .nav-brand em{color:var(--green);font-style:normal;}
 .nav-right{display:flex;gap:1.5rem;align-items:center;}
@@ -24,7 +24,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 5%;display:flex
 .nav-cta{background:var(--green)!important;color:var(--dark)!important;padding:8px 20px;border-radius:50px;font-weight:600;font-size:13px!important;}
 
 /* LANG SWITCHER */
-.lang-switcher{display:flex;gap:2px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:50px;padding:3px;}
+.lang-switcher{display:flex;gap:2px;background:rgba(0,0,0,.04);border:1px solid var(--border);border-radius:50px;padding:3px;}
 .lang-btn{border:none;background:transparent;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:50px;cursor:pointer;transition:all .2s;letter-spacing:.5px;font-family:'DM Sans',sans-serif;}
 .lang-btn.active{background:var(--green);color:var(--dark);}
 .lang-btn:hover:not(.active){color:var(--light);}
@@ -71,21 +71,21 @@ body.ar .s-title{font-family:'Cairo',sans-serif;}
 .demo-list{list-style:none;margin:1.5rem 0 2rem;display:flex;flex-direction:column;gap:10px;}
 .demo-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);line-height:1.6;}
 .demo-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
-.demo-visual{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;overflow:hidden;}
+.demo-visual{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.06);}
 .demo-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));}
 .demo-dot2{width:10px;height:10px;border-radius:50%;}
 .d1{background:#ff5f57;}.d2{background:#ffbd2e;}.d3{background:#28ca41;}
-.demo-url{background:rgba(255,255,255,.05);border-radius:6px;padding:6px 12px;font-size:11px;color:var(--muted);flex:1;}
-.demo-screen{background:var(--dark);border-radius:8px;padding:1.5rem;min-height:200px;margin-top:1rem;}
-.demo-row{height:10px;background:rgba(255,255,255,.06);border-radius:4px;margin-bottom:10px;}
+.demo-url{background:rgba(0,0,0,.04);border-radius:6px;padding:6px 12px;font-size:11px;color:var(--muted);flex:1;}
+.demo-screen{background:#1a1a24;border-radius:8px;padding:1.5rem;min-height:200px;margin-top:1rem;}
+.demo-row{height:10px;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:10px;}
 .demo-row.w60{width:60%;}.demo-row.w80{width:80%;}.demo-row.w40{width:40%;}.demo-row.w90{width:90%;}
-.demo-row.green{background:rgba(29,184,122,.2);width:30%;}
+.demo-row.green{background:rgba(29,184,122,.35);width:30%;}
 .demo-mini-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:1rem;}
-.demo-card-mini{background:rgba(255,255,255,.04);border-radius:6px;height:50px;}
+.demo-card-mini{background:rgba(255,255,255,.06);border-radius:6px;height:50px;}
 
 /* PRICING */
 .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:800px;margin:0 auto;}
-.price-card{border:1px solid var(--border);border-radius:16px;padding:2.5rem 2rem;position:relative;transition:transform .2s;background:var(--dark2);}
+.price-card{border:1px solid var(--border);border-radius:16px;padding:2.5rem 2rem;position:relative;transition:transform .2s;background:var(--dark2);box-shadow:0 10px 40px rgba(0,0,0,0.04);}
 .price-card:hover{transform:translateY(-4px);}
 .price-card.pro{border-color:rgba(29,184,122,.4);background:linear-gradient(135deg,var(--dark2),rgba(29,184,122,.04));}
 .pro-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:var(--dark);font-size:11px;font-weight:700;padding:4px 16px;border-radius:50px;white-space:nowrap;letter-spacing:1px;}
@@ -137,7 +137,7 @@ footer{padding:2rem 5%;border-top:1px solid var(--border);display:flex;justify-c
 }
 </style>
 </head>
-<body>
+<body class="ar">
 
 <nav>
   <div class="nav-brand">TOP<em>DEALS</em></div>
@@ -163,7 +163,7 @@ footer{padding:2rem 5%;border-top:1px solid var(--border);display:flex;justify-c
   <h1 data-i18n-html="hero.h1">Your online shop,<br><span class="gr">ready</span> in 24h.</h1>
   <p class="hero-sub" data-i18n="hero.sub">A complete e-commerce site with admin dashboard, order management, live chat and Facebook Pixel — all included.</p>
   <div class="btns">
-    <a href="https://demoshop-tm8r.onrender.com" target="_blank" class="btn-p">
+    <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" class="btn-p">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       <span data-i18n="hero.demo_btn">View Demo</span>
     </a>
@@ -205,7 +205,7 @@ footer{padding:2rem 5%;border-top:1px solid var(--border);display:flex;justify-c
         <li data-i18n="demo.l3">Fully working order system</li>
         <li data-i18n="demo.l4">Live customer chat active</li>
       </ul>
-      <a href="https://demoshop-tm8r.onrender.com" target="_blank" class="btn-p" style="display:inline-flex;width:fit-content;">
+      <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" class="btn-p" style="display:inline-flex;width:fit-content;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         <span data-i18n="demo.btn">Open Demo</span>
       </a>
@@ -305,7 +305,7 @@ footer{padding:2rem 5%;border-top:1px solid var(--border);display:flex;justify-c
   <div class="footer-info" data-i18n="footer.copy">© 2026 Topdeals Tunisia. All rights reserved.</div>
   <div class="footer-contact">
     <a href="https://wa.me/21654116584">+216 54 116 584</a> ·
-    <a href="https://demoshop-tm8r.onrender.com" target="_blank" data-i18n="footer.demo">View demo</a>
+    <a href="https://shoptemplate-3t7u.onrender.com" target="_blank" data-i18n="footer.demo">View demo</a>
   </div>
 </footer>
 
@@ -421,7 +421,7 @@ const translations = {
   }
 };
 
-let currentLang = 'en';
+let currentLang = 'ar';
 
 function setLang(lang) {
   currentLang = lang;
@@ -461,8 +461,8 @@ function setLang(lang) {
   document.querySelector('.whatsapp-btn').href = `https://wa.me/21654116584?text=${encodeURIComponent(msg.main)}`;
 }
 
-// Init with EN
-setLang('en');
+// Init with AR
+setLang('ar');
 </script>
 </body>
 </html>
